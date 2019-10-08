@@ -1,5 +1,5 @@
 # Doughnut
-This project is about Doughnut Decision Helper with an Angular frontend and ASP.NET Core 2.2 WebApi backend.
+This project is about Doughnut Decision Helper with an Angular frontend and ASP.NET Core 2.2 WebApi backend and Decision Tree algorithm.
 
 # Development Environment
 
