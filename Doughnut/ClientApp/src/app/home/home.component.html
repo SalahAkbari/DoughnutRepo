@@ -1,0 +1,171 @@
+<form [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      class="login-form">
+
+  <div *ngIf="appear1">
+    <h3>DO I WANT A DOUGHNUT?</h3>
+
+    <div class="form-group">
+
+      <label class="form-check-inline">
+        <input type="radio" (click)="changeValue(true)"
+               formControlName="answer0" value="true"
+               class="form-control" />
+        YES
+      </label>
+
+      <label class="form-check-inline">
+        <input type="radio" (click)="changeValue(false)"
+               formControlName="answer0" value="false"
+               class="form-control" />
+        NO
+      </label>
+    </div>
+
+  </div>
+
+  <div *ngIf="appear2">
+    <h3>Do I deserve it?</h3>
+
+    <div class="form-group">
+
+      <label class="form-check-inline">
+        <input type="radio"
+               formControlName="answer1" value="true" (click)="changeSecondValue(true)"
+               class="form-control" />
+        YES
+      </label>
+
+      <label class="form-check-inline">
+        <input type="radio"
+               formControlName="answer1" value="false" (click)="changeSecondValue(false)"
+               class="form-control" />
+        NO
+      </label>
+    </div>
+  </div>
+
+  <div *ngIf="appear3 && isValid">
+    <h3>Are you sure?</h3>
+
+    <div class="form-group">
+
+      <label class="form-check-inline">
+        <input type="radio" (click)="changeFinalValue(true)"
+               formControlName="answer2" value="true"
+               class="form-control" />
+        YES
+      </label>
+
+      <label class="form-check-inline">
+        <input type="radio" (click)="changeFinalValue(false)"
+               formControlName="answer2" value="false"
+               class="form-control" />
+        NO
+      </label>
+    </div>
+
+  </div>
+
+  <div *ngIf="appear3 && !isValid && isValid != null">
+    <h3>Is it a good doughnut?</h3>
+
+    <div class="form-group">
+
+      <label class="form-check-inline">
+        <input type="radio" (click)="changeFinalValue(true)"
+               formControlName="answer2" value="true"
+               class="form-control" />
+        YES
+      </label>
+
+      <label class="form-check-inline">
+        <input type="radio" (click)="changeFinalValue(false)"
+               formControlName="answer2" value="false"
+               class="form-control" />
+        NO
+      </label>
+    </div>
+
+  </div>
+
+  <div>
+
+    <button *ngIf="!appear1" type="button" (click)="onBack()" class="btn btn-link">
+      Back
+    </button>
+
+    <button *ngIf="!appear3 && !enableSubmit" type="button" (click)="onNext()" class="btn btn-link">
+      Next
+    </button>
+
+  </div>
+
+  <div>
+
+    <button type="submit" *ngIf="appear3 || enableSubmit"
+            class="btn btn-md btn-success btn-signin">
+      Submit
+    </button>
+  </div>
+
+</form>
+
+<div *ngIf="isShow">
+  <h2>The answer is: {{result}}</h2>
+
+  <p>The following highlights shows the choices you have made in your story, it is indicated in DeepPink color</p>
+
+</div>
+
+<div xmlns="xhtml" class="centered" *ngIf="isShow">
+  <ul class="orgchart">
+    <li class="root">
+      <div class="nodecontent">DO I WANT A DOUGHNUT?</div>
+      <ul>
+        <li>
+          <ul>
+            <li class="vertical">
+              <div [ngClass]="(!firstNo  ? 'nodecontent selected' : 'nodecontent')">YES</div>
+              Do I deserve it?
+              <ul>
+                <li class="leaf">
+                  <div [ngClass]="(!firstNo && !secondNo && secondNo != null  ? 'nodecontent selected' : 'nodecontent')">YES</div>
+                  Are you sure?
+                  <ul>
+                    <li class="leaf">
+                      <div [ngClass]="(!firstNo && !secondNo && !finalNo && finalNo != null  ? 'nodecontent selected' : 'nodecontent')">YES</div>
+                      Get it.
+                    </li>
+                    <li class="leaf">
+                      <div [ngClass]="(!firstNo && !secondNo && finalNo  ? 'nodecontent selected' : 'nodecontent')">NO</div>
+                      Do jumping jacks first.
+                    </li>
+                  </ul>
+                </li>
+                <li class="leaf">
+                  <div [ngClass]="(!firstNo && secondNo  ? 'nodecontent selected' : 'nodecontent')">NO</div>
+                  Is it a good doughnut?
+                  <ul>
+                    <li class="leaf">
+                      <div [ngClass]="(!firstNo && secondNo && !finalNo && finalNo != null  ? 'nodecontent selected' : 'nodecontent')">YES</div>
+                      What are you waiting for? Grab it now.
+                    </li>
+                    <li class="leaf">
+                      <div [ngClass]="(!firstNo && secondNo && finalNo  ? 'nodecontent selected' : 'nodecontent')">NO</div>
+                      Wait 'til you find a sinful, unforgettable doughnut.
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="leaf">
+              <div [ngClass]="(firstNo  ? 'nodecontent selected' : 'nodecontent')">NO</div>
+              Maybe you want an apple.
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
